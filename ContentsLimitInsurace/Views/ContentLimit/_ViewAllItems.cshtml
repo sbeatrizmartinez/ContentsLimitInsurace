@@ -5,10 +5,7 @@
 <a onclick="showPopUp('@Url.Action("Create","ContentLimit",null,Context.Request.Scheme)', '')" class="btn btn-outline-info " CausesValidation="False"> Add New Item</a>
 <h1></h1>
 
-
 <div class="align-content-start">
-
-
     @foreach (var cat in ContentsLimitInsuranceWebApp.Helpers.Category.categoryList().OrderBy(c => c.Value))
     {
         <table class="table align-content-center table-hover col" id=cat name=cat>
