@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ContentsLimitInsurace.Models.ContentLimit>
+
+
+<h1 class="text-center"><b><i class="text-info">Content Limits Insurace Estimate</i></b></h1>
+<a onclick="showPopUp('@Url.Action("Create","ContentLimit",null,Context.Request.Scheme)', '')" class="btn btn-outline-info " CausesValidation="False"> Add New Item</a>
+<h1></h1>
+
+
+<div class="align-content-start">
+
+
+    @foreach (var cat in ContentsLimitInsuranceWebApp.Helpers.Category.categoryList().OrderBy(c => c.Value))
+    {
+        <table class="table align-content-center table-hover col" id=cat name=cat>
+            <thead class="align-items-center">
+                <tr>
+                    <th class="row">
+                        @cat.Value
+
+                    </th>
+                    <td></td>
+                    <td></td>
+                    <td> <b class="text-dark">$ @Model.Where(c => c.itemCategory.Equals(cat.Value)).Sum(b => b.itemValue)</b></td>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model.OrderBy(name => name.itemName))
+            {
+                if (item.itemCategory == cat.Value)
+                {
+
+                    <tbody class="align-items-center">
+
+                        <tr>
+                            <td></td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.itemName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.itemValue)
+                            </td>
+                            <td>
+
+                                <form asp-action="Delete" asp-route-id="@item.ContentId"  onsubmit="if (confirm('Are you sure you would like to delete this item?')) {return deleteItem(this) } else {return false}">
+                                    <input type="submit" value="Delete" class="btn btn-link text-danger ">
+
+
+                                </form>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                }
+            }
+        </table>
+
+
+    }
+</div>
+
+
+<div>
+    <h3 class="float-left text-dark"> Total $ @Model.Sum(i => i.itemValue)</h3>
+</div>

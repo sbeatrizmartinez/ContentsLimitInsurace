@@ -1,0 +1,40 @@
+﻿@model ContentsLimitInsurace.Models.ContentLimit
+
+@{
+    ViewData["Title"] = "Add New";
+    Layout = null;
+}
+
+<h1>Add Home Item to List</h1>
+<hr />
+<div class="row border-0 ">
+    <div class="col-md-12 align-content-center">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="itemName" class="control-label">Name</label>
+                <input placeholder="Item Name" asp-for="itemName" required class="form-control" />
+                <span asp-validation-for="itemName" class="text-danger"></span>
+
+                <label asp-for="itemValue" class="control-label">Cost</label>
+                <input type="number" step="1" asp-for="itemValue" required class="form-control" />
+                <span asp-validation-for="itemValue" class="text-danger"></span>
+
+                <label asp-for="itemName" class="control-label">Category</label>
+                @Html.DropDownListFor(model => model.itemCategory, ContentsLimitInsuranceWebApp.Helpers.Category.categoryList(), htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.itemCategory, "", new { @class = "text-danger" })
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary btn-block" />
+            </div>
+        </form>
+</div>
+</div>
+<div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

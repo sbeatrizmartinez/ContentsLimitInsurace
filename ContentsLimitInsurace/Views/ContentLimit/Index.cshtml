@@ -1,0 +1,10 @@
+﻿@model IEnumerable<ContentsLimitInsurace.Models.ContentLimit>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div id="view_all_items">
+    @await Html.PartialAsync("_ViewAllItems",Model)  
+</div>
+
